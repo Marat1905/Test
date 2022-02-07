@@ -1,0 +1,116 @@
+﻿<Window x:Class="Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Test"
+        xmlns:ViewModel="clr-namespace:Test.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{x:Type ViewModel:MainVM}">
+    <Grid>
+        <Border BorderBrush="Gray" BorderThickness="2" >
+            <DataGrid x:Name="_datagrid" ItemsSource="{Binding AllTambSource}"  
+                      SelectionMode="Single"                     
+                      CanUserAddRows="False" 
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="False"
+                      CanUserResizeColumns="False" Background="Transparent" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White" Foreground="White" OpacityMask="#FF232323" AutoGenerateColumns="False" >
+               
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#FF232323" />
+                        <Setter Property="Foreground" Value="white"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="HorizontalContentAlignment"  Value="Center" />
+                        <Setter Property="VerticalContentAlignment"  Value="Center" />
+
+                    </Style>
+
+                    <ContextMenu x:Key="RowMenu" FontFamily="Calibri" 
+                                 DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+
+                        <MenuItem Header="Добавить лаб-ые показатели"
+                                  Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.InsertLabCommand}" 
+                                                    CommandParameter="{Binding}"/>
+                    </ContextMenu>
+
+
+                </DataGrid.Resources >
+                <DataGrid.Columns >
+                    <DataGridTemplateColumn Width="60"  >
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock TextWrapping="Wrap" Text="ID Тамбура" TextAlignment="Center"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate >
+                                <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Hyperlink  Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OpenTambCommand}" 
+                                                    CommandParameter="{Binding}">
+                                        <TextBlock Text="{Binding Id}"/>
+                                    </Hyperlink>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Width="0.3*" IsReadOnly="True" Foreground="Black"
+                        Binding="{Binding WeightMainRef}" CanUserSort="False">
+                        <DataGridTextColumn.Header>
+                            <TextBlock TextWrapping="Wrap" Text="Заднный вес, m2" TextAlignment="Center"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="0.3*"  IsReadOnly="True"  Foreground="Black"
+                        Binding="{Binding WeightMainAct}" CanUserSort="False">
+                        <DataGridTextColumn.Header>
+                            <TextBlock TextWrapping="Wrap" Text="Измеренный вес, m2" TextAlignment="Center"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    
+
+                    <DataGridTemplateColumn  Width="auto"  >
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock TextWrapping="Wrap" Text=" Лабораторные показатели " TextAlignment="Center"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate >
+                                <ItemsControl ItemsSource="{Binding Lab}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate >
+                                            <Button 
+                                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.UpdateLabCommand}" 
+                                                    CommandParameter="{Binding}">
+                                                <Button.Content>
+                                                    <TextBlock  Text="{ Binding StringFormat= Лаб-ые показатели ID  {0},Path= Id}"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                  
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow" >
+                        <Setter Property="Background" Value="{Binding Background}"></Setter>
+                        <Setter Property="ContextMenu" Value="{StaticResource RowMenu}"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding TamburStatus}" Value="В работе">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding TamburStatus}" Value="В брак">
+                                <Setter Property="Background" Value="Gray"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Window>
