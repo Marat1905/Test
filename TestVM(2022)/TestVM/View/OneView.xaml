@@ -18,6 +18,7 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
+            <TextBlock Text="Первая вкладка"/>
             <ComboBox x:Name="cBox1"  Margin="{StaticResource ControlMargin}"
                       IsEditable="True"
                       ItemsSource="{Binding StrategSource}"
