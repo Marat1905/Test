@@ -26,7 +26,6 @@ namespace TestVM
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = viewModel = new MainViewModel();
         }
     }
 }

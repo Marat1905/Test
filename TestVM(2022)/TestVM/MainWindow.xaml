@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         xmlns:ViewModels="clr-namespace:TestVM.ViewModel"
         xmlns:US="clr-namespace:TestVM.View"
-        d:DataContext="{x:Type ViewModels:MainViewModel}"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <ViewModels:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -16,13 +18,17 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="2">
             <TabControl>
-                <TabItem Header="1 модель">
-                    <US:OneView DataContext="{Binding}"/>
+                <TabItem Header="1 модель" Content="{Binding}">
+                    <TabItem.ContentTemplate>
+                        <DataTemplate>
+                            <US:OneView DataContext="{Binding}"/>
+                        </DataTemplate>
+                    </TabItem.ContentTemplate>
                 </TabItem>
                 <TabItem Header="2 модель">
-                    <AdornerDecorator>
+                    <!--<AdornerDecorator>
                         <US:SecondView DataContext="{Binding}"/>
-                    </AdornerDecorator>
+                    </AdornerDecorator>-->
                         
                 </TabItem>
                 

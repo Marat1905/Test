@@ -5,9 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestVM.View"
              mc:Ignorable="d"
-             xmlns:viewmodel="clr-namespace:TestVM.ViewModel"
-             d:DataContext="{d:DesignInstance viewmodel:OneViewModel}"
+             xmlns:vms="clr-namespace:TestVM.ViewModel"
+             d:DataContext="{d:DesignInstance vms:MainViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
+
     <UserControl.Resources>
         <ResourceDictionary>
             <Thickness x:Key="ControlMargin">0 5 0 0</Thickness>
@@ -17,19 +18,22 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
-            <ComboBox 
-                              Margin="{StaticResource ControlMargin}"
-                              IsEditable="True"
-                              ItemsSource="{Binding StrategSource}"
-                              MaxDropDownHeight="125"
-                              Text="{Binding OneVM.ChosenStrateg,Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+            <ComboBox x:Name="cBox1"  Margin="{StaticResource ControlMargin}"
+                      IsEditable="True"
+                      ItemsSource="{Binding StrategSource}"
+                      MaxDropDownHeight="125"
+                      Text="{Binding OneVM.ChosenStrateg, Mode=TwoWay,
+                            ValidatesOnExceptions=True, ValidatesOnDataErrors=True,
+                            UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
-            <ComboBox 
-                              Margin="{StaticResource ControlMargin}"
-                              IsEditable="True"
-                              ItemsSource="{Binding SymbolSource}"
-                              MaxDropDownHeight="125"
-                              Text="{Binding OneVM.SymbolPare,Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
+            <ComboBox x:Name="cBox2" 
+                      Margin="{StaticResource ControlMargin}"
+                      IsEditable="True"
+                      ItemsSource="{Binding SymbolSource}"
+                      MaxDropDownHeight="125"
+                      Text="{Binding OneVM.SymbolPare, Mode=TwoWay,
+                            ValidatesOnExceptions=True, ValidatesOnDataErrors=True,
+                            UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
         </StackPanel>
     </Grid>

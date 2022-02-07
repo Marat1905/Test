@@ -21,6 +21,15 @@ namespace TestVM.View
         public OneView()
         {
             InitializeComponent();
+            //Loaded += OnLoaded;
         }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var bindExpr = cBox1.GetBindingExpression(ComboBox.TextProperty);
+            bindExpr.UpdateTarget();
+            bindExpr = cBox2.GetBindingExpression(ComboBox.TextProperty);
+            bindExpr.UpdateTarget();
+       }
     }
 }
