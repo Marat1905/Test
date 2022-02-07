@@ -21,4 +21,19 @@
         <Button Content="Переключить UC" Margin="10" Click="OnSwap"/>
         <ContentPresenter x:Name="presenter" Grid.Row="1" Content="{Binding Mode=OneWay, Source={StaticResource one}}"/>
     </Grid>
+    <x:Code><![CDATA[
+        private void OnSwap(object sender, RoutedEventArgs e)
+        {
+            UserControl one = (UserControl)FindResource(nameof(one));
+            UserControl two = (UserControl)FindResource(nameof(two));
+            if (presenter.Content != one)
+            {
+                presenter.Content = one;
+            }
+            else
+            {
+                presenter.Content = two;
+            }
+        }
+        ]]></x:Code>
 </Window>

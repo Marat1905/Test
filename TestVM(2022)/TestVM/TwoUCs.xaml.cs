@@ -12,19 +12,5 @@ namespace TestVM
         {
             InitializeComponent();
         }
-
-        private void OnSwap(object sender, RoutedEventArgs e)
-        {
-            UserControl one = (UserControl)FindResource(nameof(one));
-            UserControl two = (UserControl)FindResource(nameof(two));
-            if (presenter.Content != one)
-            {
-                presenter.Content = one;
-            }
-            else
-            {
-                presenter.Content = two;
-            }
-        }
     }
 }

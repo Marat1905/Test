@@ -26,8 +26,13 @@
                     </TabItem.ContentTemplate>
                 </TabItem>
                 <TabItem Header="2 модель">
+                    <TabItem.ContentTemplate>
+                        <DataTemplate>
+                            <US:SecondView DataContext="{Binding}"/>
+                        </DataTemplate>
+                    </TabItem.ContentTemplate>
                     <!--<AdornerDecorator>
-                        <US:SecondView DataContext="{Binding}"/>
+                        
                     </AdornerDecorator>-->
                         
                 </TabItem>
