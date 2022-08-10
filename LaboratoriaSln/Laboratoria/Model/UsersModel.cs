@@ -13,12 +13,12 @@ namespace Laboratoria.Model
 {
     public class UsersModel
     {
-        // Для работы без БД создаются тестовые коллекци для имитации таблиц БД.
+        // Для работы без БД создаются тестовые коллекции для имитации таблиц БД.
 #if withoutDB
         private IReadOnlyList<string> positions = Array.AsReadOnly(new string[] { "Начальник", "Лаборант" });
         private UserSmenaEntity[] users =
         {
-            new UserSmenaEntity() {Id = 1, FIO="Иванов Иван Иваныч"},
+            new UserSmenaEntity() {Id = 1, FIO="Иванов Иван Иванович"},
             new UserSmenaEntity() {Id = 2, FIO="Федоров Федор Фёдорович"},
             new UserSmenaEntity() {Id = 3, FIO="Сидоров Сидор Сидорович"},
             new UserSmenaEntity() {Id = 4, FIO="Николаев Николай Николаевич"}
